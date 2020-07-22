@@ -7,13 +7,17 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node dist/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "seed:config": "ts-node-dev ./node_modules/typeorm-seeding/dist/cli.js config",
+    "seed:run": "ts-node-dev ./node_modules/typeorm-seeding/dist/cli.js seed"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "pg": "^8.3.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25",
+    "typeorm-seeding": "^1.6.1",
     "uuidv4": "^6.2.0"
   },
   "devDependencies": {
@@ -22,6 +26,7 @@
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.7",
     "@types/node": "^14.0.24",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
