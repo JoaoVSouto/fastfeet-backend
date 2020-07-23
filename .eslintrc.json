@@ -38,7 +38,8 @@
       "error",
       "always",
       { "exceptAfterSingleLine": true }
-    ]
+    ],
+    "import/no-extraneous-dependencies": "off"
   },
   "settings": {
     "import/resolver": {
