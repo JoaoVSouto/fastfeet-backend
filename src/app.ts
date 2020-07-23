@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import 'express-async-errors';
 
 import express, { Express, Request, Response, NextFunction } from 'express';
-import { errors } from 'celebrate';
+import { errors as celebrateErrors } from 'celebrate';
 
 import './database';
 
@@ -30,7 +30,7 @@ class App {
   }
 
   private exceptionHandler() {
-    this.server.use(errors());
+    this.server.use(celebrateErrors());
 
     this.server.use(
       (err: Error, req: Request, res: Response, _: NextFunction) => {

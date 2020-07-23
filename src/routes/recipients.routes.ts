@@ -2,13 +2,15 @@ import { Router } from 'express';
 
 import ensureAuthenticated from '@middlewares/ensureAuthenticated';
 
+import RecipientValidator from '@validators/RecipientValidator';
+
 import CreateRecipientService from '@services/CreateRecipientService';
 
 const routes = Router();
 
 routes.use(ensureAuthenticated);
 
-routes.post('/', async (req, res) => {
+routes.post('/', RecipientValidator.create(), async (req, res) => {
   const {
     name,
     address_street,
