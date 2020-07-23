@@ -4,6 +4,8 @@ import { sign } from 'jsonwebtoken';
 
 import authConfig from '@config/auth';
 
+import AppError from '@errors/AppError';
+
 import User from '@models/User';
 
 interface IRequest {
@@ -23,13 +25,13 @@ class AuthenticateUserService {
     const user = await userRepository.findOne({ where: { email } });
 
     if (!user) {
-      throw new Error('Email not found');
+      throw new AppError('Email not found', 401);
     }
 
     const passwordMatched = await compare(password, user.password_hash);
 
     if (!passwordMatched) {
-      throw new Error('Incorrect password');
+      throw new AppError('Incorrect password', 401);
     }
 
     const { secret, expiresIn } = authConfig;
