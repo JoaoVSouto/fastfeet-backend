@@ -20,6 +20,7 @@ module.exports = {
           '@services': './src/services',
           '@middlewares': './src/middlewares',
           '@errors': './src/errors',
+          '@validators': './src/validators',
         },
       },
     ],

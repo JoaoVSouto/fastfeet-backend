@@ -20,7 +20,8 @@
       "@models/*": ["./src/models/*"],
       "@config/*": ["./src/config/*"],
       "@middlewares/*": ["./src/middlewares/*"],
-      "@errors/*": ["./src/errors/*"]
+      "@errors/*": ["./src/errors/*"],
+      "@validators/*": ["./src/validators/*"]
     }
   },
   "include": ["src/**/*"],

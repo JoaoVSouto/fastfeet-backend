@@ -1,5 +1,7 @@
 import { Router, Request } from 'express';
 
+import { create as createSessionValidator } from '@validators/sessions';
+
 import AuthenticateUserService from '@services/AuthenticateUserService';
 
 const routes = Router();
@@ -11,7 +13,7 @@ interface IRequest extends Request {
   };
 }
 
-routes.post('/', async (req: IRequest, res) => {
+routes.post('/', createSessionValidator, async (req: IRequest, res) => {
   const { email, password } = req.body;
 
   const authenticateUser = new AuthenticateUserService();
