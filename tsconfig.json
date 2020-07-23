@@ -18,7 +18,8 @@
     "paths": {
       "@services/*": ["./src/services/*"],
       "@models/*": ["./src/models/*"],
-      "@config/*": ["./src/config/*"]
+      "@config/*": ["./src/config/*"],
+      "@middlewares/*": ["./src/middlewares/*"]
     }
   },
   "include": ["src/**/*"],
