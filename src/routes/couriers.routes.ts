@@ -37,18 +37,14 @@ routes.get('/:id', CourierValidator.show(), async (req, res) => {
 
 routes.post('/', upload.single('avatar'), async (req, res) => {
   const { name, email } = req.body;
-  const {
-    originalname: originalFileName,
-    filename: persistedFileName,
-  } = req.file;
 
   const createCourier = new CreateCourierService();
 
   const courier = await createCourier.execute({
     name,
     email,
-    originalFileName,
-    persistedFileName,
+    originalFileName: req?.file?.originalname,
+    persistedFileName: req?.file?.filename,
   });
 
   return res.json(courier);

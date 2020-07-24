@@ -8,8 +8,8 @@ import File from '@models/File';
 interface IRequest {
   name: string;
   email: string;
-  originalFileName: string;
-  persistedFileName: string;
+  originalFileName?: string;
+  persistedFileName?: string;
 }
 
 interface IResponse {
@@ -36,14 +36,18 @@ class CreateCourierService {
       throw new AppError('Courier already exists');
     }
 
-    const fileRepository = getRepository(File);
+    let avatar: File | null = null;
 
-    const avatar = fileRepository.create({
-      name: originalFileName,
-      path: persistedFileName,
-    });
+    if (originalFileName && persistedFileName) {
+      const fileRepository = getRepository(File);
 
-    await fileRepository.save(avatar);
+      avatar = fileRepository.create({
+        name: originalFileName,
+        path: persistedFileName,
+      });
+
+      await fileRepository.save(avatar);
+    }
 
     const courier = courierRepository.create({
       name,
@@ -57,10 +61,12 @@ class CreateCourierService {
       id: courier.id,
       name,
       email,
-      avatar: {
-        id: avatar.id,
-        path: avatar.path,
-      },
+      avatar: avatar
+        ? {
+            id: avatar.id,
+            path: avatar.path,
+          }
+        : null,
     };
   }
 }
