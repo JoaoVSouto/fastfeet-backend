@@ -1,4 +1,11 @@
-import { celebrate, Joi, Segments } from 'celebrate';
+import path from 'path';
+
+import { celebrate, Joi, Segments, CelebrateError } from 'celebrate';
+import { Request, Response, NextFunction } from 'express';
+
+import deleteFile from '@utils/deleteFile';
+
+import { uploadsDir } from '@config/upload';
 
 class CourierValidator {
   show() {
@@ -12,17 +19,30 @@ class CourierValidator {
   }
 
   create() {
-    const validator = celebrate(
-      {
-        [Segments.BODY]: Joi.object().keys({
+    const validator = async (
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ) => {
+      try {
+        const schema = Joi.object().keys({
           name: Joi.string().required(),
           email: Joi.string().email().required(),
-        }),
-      },
-      {
-        abortEarly: false,
-      },
-    );
+        });
+
+        await schema.validateAsync(req.body, { abortEarly: false });
+
+        return next();
+      } catch (err) {
+        if (req.file) {
+          await deleteFile(
+            path.resolve(uploadsDir, 'couriers', req.file.filename),
+          );
+        }
+
+        throw CelebrateError(err, Segments.BODY, { celebrated: true });
+      }
+    };
 
     return validator;
   }

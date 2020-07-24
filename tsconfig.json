@@ -21,7 +21,8 @@
       "@config/*": ["./src/config/*"],
       "@middlewares/*": ["./src/middlewares/*"],
       "@errors/*": ["./src/errors/*"],
-      "@validators/*": ["./src/validators/*"]
+      "@validators/*": ["./src/validators/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src/**/*"],
