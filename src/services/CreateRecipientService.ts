@@ -2,7 +2,7 @@ import { getRepository } from 'typeorm';
 
 import Recipient from '@models/Recipient';
 
-interface IRequest {
+export interface IRequest {
   name: string;
   address_street: string;
   address_number: number;

@@ -5,6 +5,7 @@ import ensureAuthenticated from '@middlewares/ensureAuthenticated';
 import RecipientValidator from '@validators/RecipientValidator';
 
 import CreateRecipientService from '@services/CreateRecipientService';
+import UpdateRecipientService from '@services/UpdateRecipientService';
 
 const routes = Router();
 
@@ -24,6 +25,34 @@ routes.post('/', RecipientValidator.create(), async (req, res) => {
   const createRecipient = new CreateRecipientService();
 
   const recipient = await createRecipient.execute({
+    name,
+    address_street,
+    address_number,
+    address_complement,
+    address_cep,
+    uf,
+    city,
+  });
+
+  return res.json(recipient);
+});
+
+routes.put('/', async (req, res) => {
+  const {
+    id,
+    name,
+    address_street,
+    address_number,
+    address_complement,
+    address_cep,
+    uf,
+    city,
+  } = req.body;
+
+  const updateRecipient = new UpdateRecipientService();
+
+  const recipient = await updateRecipient.execute({
+    id,
     name,
     address_street,
     address_number,
