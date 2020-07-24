@@ -2,6 +2,8 @@ import { Router } from 'express';
 
 import ensureAuthenticated from '@middlewares/ensureAuthenticated';
 
+import CourierValidator from '@validators/CourierValidator';
+
 import ListCouriersService from '@services/Courier/ListCouriersService';
 import ShowCourierService from '@services/Courier/ShowCourierService';
 
@@ -17,7 +19,7 @@ routes.get('/', async (req, res) => {
   return res.json(couriers);
 });
 
-routes.get('/:id', async (req, res) => {
+routes.get('/:id', CourierValidator.show(), async (req, res) => {
   const { id } = req.params;
 
   const showCourier = new ShowCourierService();
