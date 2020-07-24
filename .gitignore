@@ -1,4 +1,8 @@
 node_modules
+
 TODO.md
+
 tmp/**/*
 !tmp/.gitkeep
+
+yarn-error.log

@@ -5,6 +5,8 @@ import path from 'path';
 
 import express, { Express, Request, Response, NextFunction } from 'express';
 import { errors as celebrateErrors } from 'celebrate';
+import Youch from 'youch';
+import PrettyError from 'pretty-error';
 
 import './database';
 
@@ -38,12 +40,22 @@ class App {
     this.server.use(celebrateErrors());
 
     this.server.use(
-      (err: Error, req: Request, res: Response, _: NextFunction) => {
+      async (err: Error, req: Request, res: Response, _: NextFunction) => {
         if (err instanceof AppError) {
           return res.status(err.statusCode).json({
             status: 'error',
             message: err.message,
           });
+        }
+
+        if (process.env.NODE_ENV === 'development') {
+          const prettyError = new PrettyError();
+          // eslint-disable-next-line no-console
+          console.log(prettyError.render(err));
+
+          const error = await new Youch(err, req).toJSON();
+
+          return res.status(500).json(error);
         }
 
         return res.status(500).json({
