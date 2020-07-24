@@ -10,6 +10,22 @@ class CourierValidator {
 
     return validator;
   }
+
+  create() {
+    const validator = celebrate(
+      {
+        [Segments.BODY]: Joi.object().keys({
+          name: Joi.string().required(),
+          email: Joi.string().email().required(),
+        }),
+      },
+      {
+        abortEarly: false,
+      },
+    );
+
+    return validator;
+  }
 }
 
 export default new CourierValidator();

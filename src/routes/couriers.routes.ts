@@ -35,19 +35,24 @@ routes.get('/:id', CourierValidator.show(), async (req, res) => {
   return res.json(courier);
 });
 
-routes.post('/', upload.single('avatar'), async (req, res) => {
-  const { name, email } = req.body;
+routes.post(
+  '/',
+  upload.single('avatar'),
+  CourierValidator.create(),
+  async (req, res) => {
+    const { name, email } = req.body;
 
-  const createCourier = new CreateCourierService();
+    const createCourier = new CreateCourierService();
 
-  const courier = await createCourier.execute({
-    name,
-    email,
-    originalFileName: req?.file?.originalname,
-    persistedFileName: req?.file?.filename,
-  });
+    const courier = await createCourier.execute({
+      name,
+      email,
+      originalFileName: req?.file?.originalname,
+      persistedFileName: req?.file?.filename,
+    });
 
-  return res.json(courier);
-});
+    return res.json(courier);
+  },
+);
 
 export default routes;
