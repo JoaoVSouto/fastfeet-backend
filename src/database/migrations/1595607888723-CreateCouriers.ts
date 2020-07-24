@@ -32,6 +32,7 @@ export class CreateCouriers1595607888723 implements MigrationInterface {
             name: 'email',
             type: 'varchar',
             isNullable: false,
+            isUnique: true,
           },
           {
             name: 'created_at',
