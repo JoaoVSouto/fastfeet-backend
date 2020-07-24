@@ -1,12 +1,16 @@
 import 'reflect-metadata';
 import 'express-async-errors';
 
+import path from 'path';
+
 import express, { Express, Request, Response, NextFunction } from 'express';
 import { errors as celebrateErrors } from 'celebrate';
 
 import './database';
 
 import AppError from '@errors/AppError';
+
+import { uploadsDir } from '@config/upload';
 
 import routes from './routes';
 
@@ -23,6 +27,7 @@ class App {
 
   private middlewares() {
     this.server.use(express.json());
+    this.server.use('/files', express.static(path.resolve(uploadsDir)));
   }
 
   private routes() {
