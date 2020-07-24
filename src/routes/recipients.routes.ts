@@ -4,8 +4,8 @@ import ensureAuthenticated from '@middlewares/ensureAuthenticated';
 
 import RecipientValidator from '@validators/RecipientValidator';
 
-import CreateRecipientService from '@services/CreateRecipientService';
-import UpdateRecipientService from '@services/UpdateRecipientService';
+import CreateRecipientService from '@services/Recipient/CreateRecipientService';
+import UpdateRecipientService from '@services/Recipient/UpdateRecipientService';
 
 const routes = Router();
 
