@@ -24,6 +24,30 @@ class RecipientValidator {
 
     return validator;
   }
+
+  update() {
+    const validator = celebrate(
+      {
+        [Segments.BODY]: Joi.object().keys({
+          id: Joi.number().positive().required(),
+          name: Joi.string(),
+          address_street: Joi.string(),
+          address_number: Joi.number().positive(),
+          address_complement: Joi.string(),
+          address_cep: Joi.string()
+            .length(8)
+            .regex(/^[0-9]+$/),
+          uf: Joi.string().length(2),
+          city: Joi.string(),
+        }),
+      },
+      {
+        abortEarly: false,
+      },
+    );
+
+    return validator;
+  }
 }
 
 export default new RecipientValidator();

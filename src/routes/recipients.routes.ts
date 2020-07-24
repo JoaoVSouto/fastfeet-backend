@@ -37,7 +37,7 @@ routes.post('/', RecipientValidator.create(), async (req, res) => {
   return res.json(recipient);
 });
 
-routes.put('/', async (req, res) => {
+routes.put('/', RecipientValidator.update(), async (req, res) => {
   const {
     id,
     name,
