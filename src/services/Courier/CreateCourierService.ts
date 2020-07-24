@@ -1,6 +1,12 @@
+import path from 'path';
+
 import { getRepository } from 'typeorm';
 
 import AppError from '@errors/AppError';
+
+import deleteFile from '@utils/deleteFile';
+
+import { uploadsDir } from '@config/upload';
 
 import Courier from '@models/Courier';
 import File from '@models/File';
@@ -26,6 +32,8 @@ class CreateCourierService {
   public async execute(req: IRequest): Promise<IResponse> {
     const { name, email, originalFileName, persistedFileName } = req;
 
+    const wasAvatarReceived = originalFileName && persistedFileName;
+
     const courierRepository = getRepository(Courier);
 
     const doesCourierExist = await courierRepository.findOne({
@@ -33,12 +41,18 @@ class CreateCourierService {
     });
 
     if (doesCourierExist) {
+      if (wasAvatarReceived) {
+        await deleteFile(
+          path.resolve(uploadsDir, 'couriers', persistedFileName),
+        );
+      }
+
       throw new AppError('Courier already exists');
     }
 
     let avatar: File | null = null;
 
-    if (originalFileName && persistedFileName) {
+    if (wasAvatarReceived) {
       const fileRepository = getRepository(File);
 
       avatar = fileRepository.create({
