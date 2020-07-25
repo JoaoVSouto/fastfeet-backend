@@ -11,7 +11,7 @@ import { uploadsDir } from '@config/upload';
 import Courier from '@models/Courier';
 import File from '@models/File';
 
-interface IRequest {
+export interface IRequest {
   name: string;
   email: string;
   originalFileName?: string;

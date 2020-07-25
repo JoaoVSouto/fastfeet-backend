@@ -10,6 +10,7 @@ import CourierValidator from '@validators/CourierValidator';
 import ListCouriersService from '@services/Courier/ListCouriersService';
 import ShowCourierService from '@services/Courier/ShowCourierService';
 import CreateCourierService from '@services/Courier/CreateCourierService';
+import UpdateCourierService from '@services/Courier/UpdateCourierService';
 
 const routes = Router();
 
@@ -54,5 +55,21 @@ routes.post(
     return res.json(courier);
   },
 );
+
+routes.put('/', upload.single('avatar'), async (req, res) => {
+  const { id, name, email } = req.body;
+
+  const updateCourier = new UpdateCourierService();
+
+  const courier = await updateCourier.execute({
+    id,
+    name,
+    email,
+    originalFileName: req?.file?.originalname,
+    persistedFileName: req?.file?.filename,
+  });
+
+  return res.json(courier);
+});
 
 export default routes;
