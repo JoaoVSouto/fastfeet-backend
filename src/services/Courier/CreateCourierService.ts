@@ -42,9 +42,7 @@ class CreateCourierService {
 
     if (doesCourierExist) {
       if (wasAvatarReceived) {
-        await deleteFile(
-          path.resolve(uploadsDir, 'couriers', persistedFileName),
-        );
+        await deleteFile(path.resolve(uploadsDir, persistedFileName));
       }
 
       throw new AppError('Courier already exists');

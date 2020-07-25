@@ -13,7 +13,7 @@ import CreateCourierService from '@services/Courier/CreateCourierService';
 
 const routes = Router();
 
-const upload = multer(multerConfig('couriers'));
+const upload = multer(multerConfig);
 
 routes.use(ensureAuthenticated);
 

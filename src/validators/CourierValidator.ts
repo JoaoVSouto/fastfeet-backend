@@ -35,9 +35,7 @@ class CourierValidator {
         return next();
       } catch (err) {
         if (req.file) {
-          await deleteFile(
-            path.resolve(uploadsDir, 'couriers', req.file.filename),
-          );
+          await deleteFile(path.resolve(uploadsDir, req.file.filename));
         }
 
         throw CelebrateError(err, Segments.BODY, { celebrated: true });
