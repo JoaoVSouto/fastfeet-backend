@@ -25,6 +25,7 @@ interface IResponse {
   avatar: {
     id: number;
     path: string;
+    url: string;
   };
 }
 
@@ -77,6 +78,7 @@ class CreateCourierService {
         ? {
             id: avatar.id,
             path: avatar.path,
+            url: avatar.url,
           }
         : null,
     };

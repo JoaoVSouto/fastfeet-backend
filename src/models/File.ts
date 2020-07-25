@@ -4,6 +4,9 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  AfterLoad,
+  AfterInsert,
+  AfterUpdate,
 } from 'typeorm';
 
 @Entity('files')
@@ -22,6 +25,15 @@ class File {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  url: string;
+
+  @AfterLoad()
+  @AfterInsert()
+  @AfterUpdate()
+  setUrl(): void {
+    this.url = `http://localhost:3333/files/${this.path}`;
+  }
 }
 
 export default File;
