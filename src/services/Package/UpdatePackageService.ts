@@ -58,10 +58,10 @@ class UpdatePackageService {
     delete packageUpdated.end_date;
     delete packageUpdated.created_at;
     delete packageUpdated.updated_at;
-    delete packageUpdated.recipient.created_at;
-    delete packageUpdated.recipient.updated_at;
-    delete packageUpdated.courier.created_at;
-    delete packageUpdated.courier.updated_at;
+    delete packageUpdated.recipient?.created_at;
+    delete packageUpdated.recipient?.updated_at;
+    delete packageUpdated.courier?.created_at;
+    delete packageUpdated.courier?.updated_at;
 
     return packageUpdated;
   }

@@ -45,7 +45,7 @@ routes.post('/', PackageValidator.create(), async (req, res) => {
   return res.json(pkg);
 });
 
-routes.put('/', async (req, res) => {
+routes.put('/', PackageValidator.update(), async (req, res) => {
   const { id, courier_id, recipient_id, product } = req.body;
 
   const updatePackage = new UpdatePackageService();

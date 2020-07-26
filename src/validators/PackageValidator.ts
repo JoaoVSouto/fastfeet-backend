@@ -27,6 +27,24 @@ class PackageValidator {
 
     return validator;
   }
+
+  update() {
+    const validator = celebrate(
+      {
+        [Segments.BODY]: Joi.object().keys({
+          id: Joi.number().positive().required(),
+          recipient_id: Joi.number().positive(),
+          courier_id: Joi.number().positive(),
+          product: Joi.string(),
+        }),
+      },
+      {
+        abortEarly: false,
+      },
+    );
+
+    return validator;
+  }
 }
 
 export default new PackageValidator();
