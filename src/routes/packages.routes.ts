@@ -7,6 +7,7 @@ import PackageValidator from '@validators/PackageValidator';
 import ListPackagesService from '@services/Package/ListPackagesService';
 import ShowPackageService from '@services/Package/ShowPackageService';
 import CreatePackageService from '@services/Package/CreatePackageService';
+import UpdatePackageService from '@services/Package/UpdatePackageService';
 
 const routes = Router();
 
@@ -38,6 +39,21 @@ routes.post('/', PackageValidator.create(), async (req, res) => {
   const pkg = await createPackage.execute({
     recipient_id,
     courier_id,
+    product,
+  });
+
+  return res.json(pkg);
+});
+
+routes.put('/', async (req, res) => {
+  const { id, courier_id, recipient_id, product } = req.body;
+
+  const updatePackage = new UpdatePackageService();
+
+  const pkg = await updatePackage.execute({
+    id,
+    courier_id,
+    recipient_id,
     product,
   });
 

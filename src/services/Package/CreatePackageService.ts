@@ -6,7 +6,7 @@ import Package from '@models/Package';
 import Recipient from '@models/Recipient';
 import Courier from '@models/Courier';
 
-interface IRequest {
+export interface IRequest {
   recipient_id: number;
   courier_id: number;
   product: string;
