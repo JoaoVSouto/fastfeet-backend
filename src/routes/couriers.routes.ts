@@ -11,6 +11,7 @@ import ListCouriersService from '@services/Courier/ListCouriersService';
 import ShowCourierService from '@services/Courier/ShowCourierService';
 import CreateCourierService from '@services/Courier/CreateCourierService';
 import UpdateCourierService from '@services/Courier/UpdateCourierService';
+import DeleteCourierService from '@services/Courier/DeleteCourierService';
 
 const routes = Router();
 
@@ -76,5 +77,15 @@ routes.put(
     return res.json(courier);
   },
 );
+
+routes.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const deleteCourier = new DeleteCourierService();
+
+  const courier = await deleteCourier.execute({ id: Number(id) });
+
+  return res.json(courier);
+});
 
 export default routes;
