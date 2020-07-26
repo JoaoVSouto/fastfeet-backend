@@ -45,6 +45,16 @@ class PackageValidator {
 
     return validator;
   }
+
+  delete() {
+    const validator = celebrate({
+      [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.number().positive(),
+      }),
+    });
+
+    return validator;
+  }
 }
 
 export default new PackageValidator();

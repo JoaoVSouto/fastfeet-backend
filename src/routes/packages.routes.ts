@@ -61,7 +61,7 @@ routes.put('/', PackageValidator.update(), async (req, res) => {
   return res.json(pkg);
 });
 
-routes.delete('/:id', async (req, res) => {
+routes.delete('/:id', PackageValidator.delete(), async (req, res) => {
   const { id } = req.params;
 
   const deletePackage = new DeletePackageService();
