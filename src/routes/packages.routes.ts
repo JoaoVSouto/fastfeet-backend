@@ -8,6 +8,7 @@ import ListPackagesService from '@services/Package/ListPackagesService';
 import ShowPackageService from '@services/Package/ShowPackageService';
 import CreatePackageService from '@services/Package/CreatePackageService';
 import UpdatePackageService from '@services/Package/UpdatePackageService';
+import DeletePackageService from '@services/Package/DeletePackageService';
 
 const routes = Router();
 
@@ -56,6 +57,16 @@ routes.put('/', PackageValidator.update(), async (req, res) => {
     recipient_id,
     product,
   });
+
+  return res.json(pkg);
+});
+
+routes.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const deletePackage = new DeletePackageService();
+
+  const pkg = await deletePackage.execute({ id: Number(id) });
 
   return res.json(pkg);
 });
