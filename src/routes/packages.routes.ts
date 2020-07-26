@@ -30,7 +30,7 @@ routes.get('/:id', PackageValidator.show(), async (req, res) => {
   return res.json(pkg);
 });
 
-routes.post('/', async (req, res) => {
+routes.post('/', PackageValidator.create(), async (req, res) => {
   const { recipient_id, courier_id, product } = req.body;
 
   const createPackage = new CreatePackageService();
