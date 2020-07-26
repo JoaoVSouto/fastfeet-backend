@@ -7,7 +7,9 @@ import File from '../../models/File';
 define(Courier, (faker: typeof Faker) => {
   const courier = new Courier();
 
-  courier.avatar = factory(File)() as any;
+  const hasAvatar = faker.random.boolean();
+
+  courier.avatar = hasAvatar ? (factory(File)() as any) : null;
   courier.name = `${faker.name.firstName()} ${faker.name.lastName()}`;
   courier.email = faker.internet.email();
 
