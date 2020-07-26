@@ -78,7 +78,7 @@ routes.put(
   },
 );
 
-routes.delete('/:id', async (req, res) => {
+routes.delete('/:id', CourierValidator.delete(), async (req, res) => {
   const { id } = req.params;
 
   const deleteCourier = new DeleteCourierService();
