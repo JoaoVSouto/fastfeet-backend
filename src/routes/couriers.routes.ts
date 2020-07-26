@@ -56,20 +56,25 @@ routes.post(
   },
 );
 
-routes.put('/', upload.single('avatar'), async (req, res) => {
-  const { id, name, email } = req.body;
+routes.put(
+  '/',
+  upload.single('avatar'),
+  CourierValidator.update(),
+  async (req, res) => {
+    const { id, name, email } = req.body;
 
-  const updateCourier = new UpdateCourierService();
+    const updateCourier = new UpdateCourierService();
 
-  const courier = await updateCourier.execute({
-    id,
-    name,
-    email,
-    originalFileName: req?.file?.originalname,
-    persistedFileName: req?.file?.filename,
-  });
+    const courier = await updateCourier.execute({
+      id,
+      name,
+      email,
+      originalFileName: req?.file?.originalname,
+      persistedFileName: req?.file?.filename,
+    });
 
-  return res.json(courier);
-});
+    return res.json(courier);
+  },
+);
 
 export default routes;

@@ -44,6 +44,34 @@ class CourierValidator {
 
     return validator;
   }
+
+  update() {
+    const validator = async (
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ) => {
+      try {
+        const schema = Joi.object().keys({
+          id: Joi.number().positive().required(),
+          name: Joi.string(),
+          email: Joi.string().email(),
+        });
+
+        await schema.validateAsync(req.body, { abortEarly: false });
+
+        return next();
+      } catch (err) {
+        if (req.file) {
+          await deleteFile(path.resolve(uploadsDir, req.file.filename));
+        }
+
+        throw CelebrateError(err, Segments.BODY, { celebrated: true });
+      }
+    };
+
+    return validator;
+  }
 }
 
 export default new CourierValidator();
