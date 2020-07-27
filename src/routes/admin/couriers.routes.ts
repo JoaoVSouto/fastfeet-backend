@@ -3,21 +3,17 @@ import multer from 'multer';
 
 import multerConfig from '@config/upload';
 
-import ensureAuthenticated from '@middlewares/ensureAuthenticated';
-
 import CourierValidator from '@validators/CourierValidator';
 
-import ListCouriersService from '@services/Courier/ListCouriersService';
-import ShowCourierService from '@services/Courier/ShowCourierService';
-import CreateCourierService from '@services/Courier/CreateCourierService';
-import UpdateCourierService from '@services/Courier/UpdateCourierService';
-import DeleteCourierService from '@services/Courier/DeleteCourierService';
+import ListCouriersService from '@services/admin/Courier/ListCouriersService';
+import ShowCourierService from '@services/admin/Courier/ShowCourierService';
+import CreateCourierService from '@services/admin/Courier/CreateCourierService';
+import UpdateCourierService from '@services/admin/Courier/UpdateCourierService';
+import DeleteCourierService from '@services/admin/Courier/DeleteCourierService';
 
 const routes = Router();
 
 const upload = multer(multerConfig);
-
-routes.use(ensureAuthenticated);
 
 routes.get('/', async (req, res) => {
   const listCouriers = new ListCouriersService();

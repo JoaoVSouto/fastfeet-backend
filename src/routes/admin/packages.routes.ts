@@ -1,18 +1,14 @@
 import { Router } from 'express';
 
-import ensureAuthenticated from '@middlewares/ensureAuthenticated';
-
 import PackageValidator from '@validators/PackageValidator';
 
-import ListPackagesService from '@services/Package/ListPackagesService';
-import ShowPackageService from '@services/Package/ShowPackageService';
-import CreatePackageService from '@services/Package/CreatePackageService';
-import UpdatePackageService from '@services/Package/UpdatePackageService';
-import DeletePackageService from '@services/Package/DeletePackageService';
+import ListPackagesService from '@services/admin/Package/ListPackagesService';
+import ShowPackageService from '@services/admin/Package/ShowPackageService';
+import CreatePackageService from '@services/admin/Package/CreatePackageService';
+import UpdatePackageService from '@services/admin/Package/UpdatePackageService';
+import DeletePackageService from '@services/admin/Package/DeletePackageService';
 
 const routes = Router();
-
-routes.use(ensureAuthenticated);
 
 routes.get('/', async (req, res) => {
   const listPackages = new ListPackagesService();

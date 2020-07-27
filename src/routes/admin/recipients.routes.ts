@@ -1,15 +1,11 @@
 import { Router } from 'express';
 
-import ensureAuthenticated from '@middlewares/ensureAuthenticated';
-
 import RecipientValidator from '@validators/RecipientValidator';
 
-import CreateRecipientService from '@services/Recipient/CreateRecipientService';
-import UpdateRecipientService from '@services/Recipient/UpdateRecipientService';
+import CreateRecipientService from '@services/admin/Recipient/CreateRecipientService';
+import UpdateRecipientService from '@services/admin/Recipient/UpdateRecipientService';
 
 const routes = Router();
-
-routes.use(ensureAuthenticated);
 
 routes.post('/', RecipientValidator.create(), async (req, res) => {
   const {

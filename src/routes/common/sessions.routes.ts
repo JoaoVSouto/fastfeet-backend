@@ -2,7 +2,7 @@ import { Router, Request } from 'express';
 
 import SessionValidator from '@validators/SessionValidator';
 
-import AuthenticateUserService from '@services/Session/AuthenticateUserService';
+import AuthenticateUserService from '@services/common/Session/AuthenticateUserService';
 
 const routes = Router();
 
