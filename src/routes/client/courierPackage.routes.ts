@@ -25,19 +25,23 @@ routes.get(
   },
 );
 
-routes.put('/:id/start_package_delivery', async (req, res) => {
-  const { id } = req.params;
-  const { package_id, start_date } = req.body;
+routes.put(
+  '/:id/start_package_delivery',
+  CourierPackageValidator.startPackageDelivery(),
+  async (req, res) => {
+    const { id } = req.params;
+    const { package_id, start_date } = req.body;
 
-  const startPackageDelivery = new StartPackageDeliveryService();
+    const startPackageDelivery = new StartPackageDeliveryService();
 
-  const pkg = await startPackageDelivery.execute({
-    courier_id: Number(id),
-    package_id,
-    start_date,
-  });
+    const pkg = await startPackageDelivery.execute({
+      courier_id: Number(id),
+      package_id,
+      start_date,
+    });
 
-  return res.json(pkg);
-});
+    return res.json(pkg);
+  },
+);
 
 export default routes;
