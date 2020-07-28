@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import CourierPackageValidator from '@validators/CourierPackageValidator';
 
-import ListCourierPackagesService from '@services/client/ListCourierPackagesService';
+import ListCourierPackagesService from '@services/client/CourierPackage/ListCourierPackagesService';
 
 const routes = Router();
 

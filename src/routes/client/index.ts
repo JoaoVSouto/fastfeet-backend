@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import courierRoutes from './courier.routes';
+import courierRoutes from './courierPackage.routes';
 
 const routes = Router();
 
