@@ -53,6 +53,7 @@ routes.put(
 routes.put(
   '/:id/end_package_delivery',
   upload.single('signature'),
+  CourierPackageValidator.endPackageDelivery(),
   async (req, res) => {
     const { id } = req.params;
     const { package_id, end_date } = req.body;
