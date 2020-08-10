@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import ListProblemsService from '@services/admin/DeliveryProblem/ListProblemsService';
+import CancelPackageService from '@services/admin/Package/CancelPackageService';
 
 const routes = Router();
 
@@ -10,6 +11,16 @@ routes.get('/', async (req, res) => {
   const packagesWithProblem = await listProblems.execute();
 
   return res.json(packagesWithProblem);
+});
+
+routes.delete('/:id/cancel-delivery', async (req, res) => {
+  const { id } = req.params;
+
+  const cancelPackage = new CancelPackageService();
+
+  const pkg = await cancelPackage.execute({ id: Number(id) });
+
+  return res.json(pkg);
 });
 
 export default routes;
