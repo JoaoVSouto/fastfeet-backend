@@ -10,6 +10,25 @@ class DeliveryProblemValidator {
 
     return validator;
   }
+
+  create() {
+    const validator = celebrate(
+      {
+        [Segments.PARAMS]: Joi.object().keys({
+          id: Joi.number().positive(),
+        }),
+        [Segments.BODY]: Joi.object().keys({
+          courier_id: Joi.number().positive().required(),
+          description: Joi.string().required(),
+        }),
+      },
+      {
+        abortEarly: false,
+      },
+    );
+
+    return validator;
+  }
 }
 
 export default new DeliveryProblemValidator();

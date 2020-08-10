@@ -23,19 +23,23 @@ routes.get(
   },
 );
 
-routes.post('/:id/problems', async (req, res) => {
-  const { id } = req.params;
-  const { courier_id, description } = req.body;
+routes.post(
+  '/:id/problems',
+  DeliveryProblemValidator.create(),
+  async (req, res) => {
+    const { id } = req.params;
+    const { courier_id, description } = req.body;
 
-  const createDeliveryProblem = new CreateDeliveryProblemService();
+    const createDeliveryProblem = new CreateDeliveryProblemService();
 
-  const deliveryProblem = await createDeliveryProblem.execute({
-    package_id: Number(id),
-    courier_id,
-    description,
-  });
+    const deliveryProblem = await createDeliveryProblem.execute({
+      package_id: Number(id),
+      courier_id,
+      description,
+    });
 
-  return res.json(deliveryProblem);
-});
+    return res.json(deliveryProblem);
+  },
+);
 
 export default routes;
