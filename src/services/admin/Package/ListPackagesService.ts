@@ -2,8 +2,14 @@ import { getRepository } from 'typeorm';
 
 import Package from '@models/Package';
 
+interface IRequest {
+  package_name?: string;
+}
+
 class ListPackagesService {
-  public async execute(): Promise<Package[]> {
+  public async execute(req: IRequest): Promise<Package[]> {
+    const { package_name = '' } = req;
+
     const packageRepository = getRepository(Package);
 
     const packages = await packageRepository
@@ -11,6 +17,9 @@ class ListPackagesService {
       .leftJoinAndSelect('package.recipient', 'recipient')
       .leftJoinAndSelect('package.courier', 'courier')
       .leftJoinAndSelect('courier.avatar', 'courier.avatar')
+      .where('package.product ilike :package_name', {
+        package_name: `%${package_name}%`,
+      })
       .select([
         'package.id',
         'package.start_date',

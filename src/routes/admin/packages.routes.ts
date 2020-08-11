@@ -11,9 +11,13 @@ import DeletePackageService from '@services/admin/Package/DeletePackageService';
 const routes = Router();
 
 routes.get('/', async (req, res) => {
+  const { q } = req.query;
+
+  const package_name = q ? String(q) : '';
+
   const listPackages = new ListPackagesService();
 
-  const packages = await listPackages.execute();
+  const packages = await listPackages.execute({ package_name });
 
   return res.json(packages);
 });
