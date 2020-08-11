@@ -9,9 +9,13 @@ import UpdateRecipientService from '@services/admin/Recipient/UpdateRecipientSer
 const routes = Router();
 
 routes.get('/', async (req, res) => {
+  const { q } = req.query;
+
+  const recipient_name = q ? String(q) : '';
+
   const listRecipients = new ListRecipientsService();
 
-  const recipients = await listRecipients.execute();
+  const recipients = await listRecipients.execute({ recipient_name });
 
   return res.json(recipients);
 });
