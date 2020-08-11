@@ -16,9 +16,13 @@ const routes = Router();
 const upload = multer(multerConfig);
 
 routes.get('/', async (req, res) => {
+  const { q } = req.query;
+
+  const courier_name = q ? String(q) : '';
+
   const listCouriers = new ListCouriersService();
 
-  const couriers = await listCouriers.execute();
+  const couriers = await listCouriers.execute({ courier_name });
 
   return res.json(couriers);
 });
