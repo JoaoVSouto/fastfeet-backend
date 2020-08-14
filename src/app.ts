@@ -5,6 +5,8 @@ import path from 'path';
 
 import express, { Express, Request, Response, NextFunction } from 'express';
 import { errors as celebrateErrors } from 'celebrate';
+import cors from 'cors';
+import helmet from 'helmet';
 import Youch from 'youch';
 import PrettyError from 'pretty-error';
 
@@ -28,6 +30,8 @@ class App {
   }
 
   private middlewares() {
+    this.server.use(helmet());
+    this.server.use(cors());
     this.server.use(express.json());
     this.server.use('/files', express.static(path.resolve(uploadsDir)));
   }
