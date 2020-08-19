@@ -34,7 +34,28 @@ class ListPackagesService {
       .orderBy('package.id')
       .getMany();
 
-    return packages;
+    const packagesWithStatus = packages.map(pkg => {
+      let status = 'retirada';
+
+      if (pkg.canceled_at) {
+        status = 'cancelada';
+      }
+
+      if (pkg.end_date) {
+        status = 'entregue';
+      }
+
+      if (!pkg.start_date) {
+        status = 'pendente';
+      }
+
+      return {
+        ...pkg,
+        status,
+      };
+    });
+
+    return packagesWithStatus;
   }
 }
 
