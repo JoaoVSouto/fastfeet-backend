@@ -25,6 +25,7 @@ class ListPackagesService {
         'package.start_date',
         'package.end_date',
         'package.canceled_at',
+        'package.product',
         'recipient.name',
         'recipient.city',
         'recipient.uf',
