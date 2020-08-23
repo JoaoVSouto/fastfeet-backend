@@ -23,6 +23,9 @@ class ShowPackageService {
       .select([
         'package.id',
         'package.product',
+        'package.start_date',
+        'package.end_date',
+        'package.canceled_at',
         'signature.path',
         'recipient',
         'courier.id',
