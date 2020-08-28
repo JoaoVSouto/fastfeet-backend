@@ -25,6 +25,7 @@ class ListCouriersService {
         'avatar.id',
         'avatar.path',
       ])
+      .orderBy('courier.id')
       .getMany();
 
     return couriers;
