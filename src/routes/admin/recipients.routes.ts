@@ -5,6 +5,7 @@ import RecipientValidator from '@validators/RecipientValidator';
 import ListRecipientsService from '@services/admin/Recipient/ListRecipientsService';
 import CreateRecipientService from '@services/admin/Recipient/CreateRecipientService';
 import UpdateRecipientService from '@services/admin/Recipient/UpdateRecipientService';
+import DeleteRecipientService from '@services/admin/Recipient/DeleteRecipientService';
 
 const routes = Router();
 
@@ -70,6 +71,16 @@ routes.put('/', RecipientValidator.update(), async (req, res) => {
     uf,
     city,
   });
+
+  return res.json(recipient);
+});
+
+routes.delete('/:id', RecipientValidator.delete(), async (req, res) => {
+  const { id } = req.params;
+
+  const deleteRecipient = new DeleteRecipientService();
+
+  const recipient = await deleteRecipient.execute({ id: Number(id) });
 
   return res.json(recipient);
 });
