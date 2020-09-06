@@ -3,6 +3,7 @@ import { Router } from 'express';
 import RecipientValidator from '@validators/RecipientValidator';
 
 import ListRecipientsService from '@services/admin/Recipient/ListRecipientsService';
+import ShowRecipientService from '@services/admin/Recipient/ShowRecipientService';
 import CreateRecipientService from '@services/admin/Recipient/CreateRecipientService';
 import UpdateRecipientService from '@services/admin/Recipient/UpdateRecipientService';
 import DeleteRecipientService from '@services/admin/Recipient/DeleteRecipientService';
@@ -19,6 +20,16 @@ routes.get('/', async (req, res) => {
   const recipients = await listRecipients.execute({ recipient_name });
 
   return res.json(recipients);
+});
+
+routes.get('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const showRecipient = new ShowRecipientService();
+
+  const recipient = await showRecipient.execute({ id: Number(id) });
+
+  return res.json(recipient);
 });
 
 routes.post('/', RecipientValidator.create(), async (req, res) => {
