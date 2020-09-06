@@ -22,7 +22,7 @@ routes.get('/', async (req, res) => {
   return res.json(recipients);
 });
 
-routes.get('/:id', async (req, res) => {
+routes.get('/:id', RecipientValidator.show(), async (req, res) => {
   const { id } = req.params;
 
   const showRecipient = new ShowRecipientService();

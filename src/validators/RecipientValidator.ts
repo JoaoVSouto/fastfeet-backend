@@ -1,6 +1,16 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 
 class RecipientValidator {
+  show() {
+    const validator = celebrate({
+      [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.number().positive(),
+      }),
+    });
+
+    return validator;
+  }
+
   create() {
     const validator = celebrate(
       {
