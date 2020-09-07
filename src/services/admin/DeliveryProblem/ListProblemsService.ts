@@ -18,6 +18,7 @@ class ListProblemsService {
         'delivery_problem.package_id',
         'delivery_problem.description',
       ])
+      .orderBy('delivery_problem.package_id')
       .getMany();
 
     return packagesWithProblem;
