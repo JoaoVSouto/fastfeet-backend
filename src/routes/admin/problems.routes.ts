@@ -16,7 +16,7 @@ routes.get('/', async (req, res) => {
   return res.json(packagesWithProblem);
 });
 
-routes.get('/:id', async (req, res) => {
+routes.get('/:id', DeliveryProblemValidator.show(), async (req, res) => {
   const { id } = req.params;
 
   const showProblem = new ShowProblemService();
